@@ -142,3 +142,5 @@ RQ_QUEUES = {
         'DEFAULT_TIMEOUT': 360,
     }
 }
+
+NAME = env('NAME')
