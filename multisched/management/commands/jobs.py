@@ -1,5 +1,6 @@
 import logging
 
+from django.core.management.base import BaseCommand, CommandError
 import django_rq
 from django_rq.management.commands import rqscheduler
 
@@ -25,10 +26,11 @@ def register_scheduled_jobs():
     )
 
 
-class Command(rqscheduler.Command):
+class Command(BaseCommand):
     """Simple test scheduling job"""
     def handle(self, *args, **kwargs):
         # This is necessary to prevent dupes
         clear_scheduled_jobs()
         register_scheduled_jobs()
-        super(Command, self).handle(*args, **kwargs)
+        self.stdout.write(self.style.SUCCESS("Added a job"))
+        # super(Command, self).handle(*args, **kwargs)

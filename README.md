@@ -17,11 +17,14 @@ Link to relevant [Issue](https://github.com/rq/rq-scheduler/issues/195) and [PR]
 ## Running
 
 1. Start `redis-server` on port 6379 (default)
+    - Or you can `docker-compose up` to launch a redis container
 2. Start rqworker with: `python manage.py rqworker`
-3. Start 2 or more rqschedulers with: `python manage.py jobs`
+3. Start 2 or more rqschedulers with: 
+    - `python3 manage.py rqscheduler -v 3 -i 10`
+    - `python3 manage.py rqscheduler -v 3 -i 8`
+    - `python3 manage.py rqscheduler -v 3 -i 5`
+4. Schedule a job to run every minute using `python manage.py jobs`
 
 **Notes:**
 
-1. `jobs` is a django management command which inherits `rqscheduler.Command` class.
-
-2. `localhost:8000/say-hello` will enqueue `say_hello` function to rqworker
+1. `localhost:8000/say-hello` will enqueue `say_hello` function to rqworker
